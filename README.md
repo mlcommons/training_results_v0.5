@@ -1,2 +1,2 @@
 # Submissions
-Result submissions
+Public result submissions

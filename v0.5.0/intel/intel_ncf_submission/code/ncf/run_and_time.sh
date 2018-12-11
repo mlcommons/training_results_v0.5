@@ -1,7 +1,7 @@
 #!/bin/bash
 # runs benchmark and reports time to convergence
 # to use the script:
-#   run_and_time.sh <parallelism> <random seed> <learning rate> <batch size> <beta1> <beta2> <max epoch>
+#   run_and_time.sh <parallelism> <random seed> <learning rate> <batch size> <beta1> <beta2> <max epoch> <eps>
 
 THRESHOLD=0.635
 BASEDIR=$(dirname -- "$0")
@@ -18,24 +18,27 @@ parallelism=${1:-28}
 seed=${2:-1}
 
 # learning rate
-lr=${3:-0.0005}
+lr=${3:-0.003821}
 
 # BatchSize
-b=${4:-2048}
+b=${4:-98304}
 
 # beta1
-beta1=${5:-0.9}
+beta1=${5:-0.783529}
 
 # beta2
-beta2=${6:-0.999}
+beta2=${6:-0.909003}
 
 # maxEpoch
 e=${7:-20}
 
-# useLazyAdam
-useLazyAdam=${8:-false}
+# epsilon
+eps=${8:-1.45439E-07}
 
-echo "parallelism=$parallelism, random seed=$seed, learning rate=$lr, batch size=$b, beta1=$beta1, beta2=$beta2, max epoch=$e, useLazyAdam=$useLazyAdam"
+# useLazyAdam
+useLazyAdam=${9:-false}
+
+echo "parallelism=$parallelism, random seed=$seed, learning rate=$lr, batch size=$b, beta1=$beta1, beta2=$beta2, max epoch=$e, epsilon=$eps, useLazyAdam=$useLazyAdam"
 echo "unzip ml-20m.zip"
 if unzip -o ml-20m.zip
 then
@@ -46,7 +49,7 @@ then
       --class com.intel.analytics.zoo.examples.mlperf.recommendation.NeuralCFexample \
       target/ncf-0.1.0-SNAPSHOT-jar-with-dependencies.jar \
       --inputDir ml-20m -b $b -e $e --valNeg 999 --layers 256,256,128,64 --numFactors 64 \
-      --dataset ml-20m -l $lr --seed $seed --threshold $THRESHOLD --beta1 $beta1 --beta2 $beta2 --useLazyAdam $useLazyAdam
+      --dataset ml-20m -l $lr --seed $seed --threshold $THRESHOLD --beta1 $beta1 --beta2 $beta2 --eps $eps --useLazyAdam $useLazyAdam
     t1=$(date +%s)
 	delta=$(( $t1 - $t0 ))
     echo "Finish training in $delta seconds"

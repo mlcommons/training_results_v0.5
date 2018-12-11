@@ -1,4 +1,4 @@
-# This script calculates ncf timing correctly, which is 3255.28.
+# This script calculates ncf timing correctly, which is 1802.46.
 
 grep "true" ncf/* | sort -V | awk 'BEGIN {FS="::::"} {print $1} NR==50{exit}' > first_50_success_file
 

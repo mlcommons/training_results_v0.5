@@ -1,0 +1,157 @@
+cpp_python_extension(
+    name = "_C",
+    srcs = glob(
+        [
+            "csrc/**/*.cpp",
+            "csrc/**/*.cu",
+        ],
+        exclude = [
+            "csrc/**/*.h"
+        ]
+    ),
+    headers = glob(["csrc/**/*.h"]),
+    base_module = "torch_detectron",
+    deps = [
+        "//caffe2:torch_extension",
+    ],
+    preprocessor_flags = [
+        "-DWITH_CUDA",
+        "-DTORCH_EXTENSION_NAME=_C",
+        '-D__CUDA_NO_HALF_OPERATORS__',
+        '-D__CUDA_NO_HALF_CONVERSIONS__',
+        '-D__CUDA_NO_HALF2_OPERATORS__',
+        "-Iexperimental/deeplearning/vision/detectron_pytorch/torch_detectron/csrc",
+    ],
+    nvcc_flags = ["-std=c++11"],
+    external_deps = [
+        ("cuda", None, "cuda-lazy"),
+    ],
+)
+
+
+
+python_library(
+    name = "modeling",
+    srcs = glob(
+        [
+            "modeling/**/*.py",
+        ],
+    ),
+    base_module = "torch_detectron",
+    deps = [
+        ":layers",
+        "//caffe2:torch",
+    ],
+)
+
+
+python_library(
+    name = "config",
+    srcs = glob(
+        [
+            "config/**/*.py",
+        ],
+    ),
+    base_module = "torch_detectron",
+    deps = [
+        "//caffe2:torch",
+        "//python/wheel/yacs:yacs",
+    ],
+)
+
+
+python_library(
+    name = "structures",
+    srcs = glob(
+        [
+            "structures/**/*.py",
+        ],
+    ),
+    base_module = "torch_detectron",
+    deps = [
+        "//caffe2:torch",
+    ],
+)
+
+
+python_library(
+    name = "utils",
+    srcs = glob(
+        [
+            "utils/**/*.py",
+        ],
+    ),
+    base_module = "torch_detectron",
+    deps = [
+        "//caffe2:torch",
+        "//pytorch/vision:torchvision",
+    ],
+)
+
+
+python_library(
+    name = "layers",
+    srcs = glob(
+        [
+            "layers/**/*.py",
+        ],
+    ),
+    base_module = "torch_detectron",
+    deps = [
+        ":_C",
+        "//caffe2:torch",
+        "//pytorch/vision:torchvision",
+    ],
+)
+
+
+python_library(
+    name = "engine",
+    srcs = glob(
+        [
+            "engine/**/*.py",
+        ],
+    ),
+    base_module = "torch_detectron",
+    deps = [
+        ":structures",
+        ":utils",
+        "//caffe2:torch",
+    ],
+)
+
+python_library(
+    name = "datasets",
+    srcs = glob(
+        [
+            "datasets/**/*.py",
+        ],
+    ),
+    base_module = "torch_detectron",
+    deps = [
+        "//deeplearning/projects/cocoApi/PythonAPI:pycocotools",
+        "//caffe2:torch",
+        "//pytorch/vision:torchvision",
+    ],
+)
+
+python_library(
+    name = "torch_detectron",
+    srcs = glob(
+        [
+            "**/*.py",
+        ],
+    ),
+    deps = [
+        ":_C",
+        ":config",
+        ":datasets",
+        ":engine",
+        ":layers",
+        ":modeling",
+        ":structures",
+        ":utils",
+        "//deeplearning/projects/cocoApi/PythonAPI:pycocotools",
+        "//caffe2:torch",
+    ],
+)

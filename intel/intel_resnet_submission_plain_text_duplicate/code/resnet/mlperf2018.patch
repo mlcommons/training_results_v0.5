@@ -1,0 +1,199 @@
+diff --git a/src/caffe/net.cpp b/src/caffe/net.cpp
+index 7019a14..b4bb08c 100644
+--- a/src/caffe/net.cpp
++++ b/src/caffe/net.cpp
+@@ -133,6 +133,57 @@ Net<Dtype>::Net(const string& param_file, Phase phase,
+   Init(param);
+ }
+ 
++void MLPerfLog(const LayerParameter& layer_param, string shape_string){
++ string prefix="MLPerf: ";
++ prefix = prefix + "<" + layer_param.name() + ">" + " ";
++ if (layer_param.phase() == TRAIN){
++     layer_param.PrintDebugString();
++       
++     string mlperf_tag;  
++     if (!layer_param.type().compare("Pooling") && layer_param.pooling_param().pool()==PoolingParameter_PoolMethod_MAX){
++         mlperf_tag="model_hp_initial_max_pool";
++         LOG_IF(INFO, Caffe::root_solver())
++             << prefix << mlperf_tag << ": " << "\"Top shape " << shape_string << "\"";
++     }
++     if (!layer_param.type().compare("BatchNorm") && layer_param.has_batch_norm_param()) {
++         mlperf_tag="model_hp_batch_norm";
++         LOG_IF(INFO, Caffe::root_solver())
++             << prefix << mlperf_tag << ": " 
++             << "{\"scale\": true, \"epsilon\": 1e-05, \"center\": true, \"training\": false, \"momentum\": 0.9, \"shape\": \"("
++             << shape_string
++             << ")\" }";
++     }
++     if (!layer_param.type().compare("InnerProduct") && layer_param.has_inner_product_param()) {
++         mlperf_tag="model_hp_dense";
++         LOG_IF(INFO, Caffe::root_solver())
++             << prefix << mlperf_tag << ": " << layer_param.inner_product_param().num_output() ;
++     }
++     if (!layer_param.type().compare("ReLU") && layer_param.has_relu_param()) {
++         mlperf_tag="model_hp_relu";
++         LOG_IF(INFO, Caffe::root_solver())
++             << prefix << mlperf_tag;
++
++     }
++     if (!layer_param.type().compare("Convolution") && layer_param.has_convolution_param()) {
++         mlperf_tag="model_hp_conv2d_fixed_padding";
++         // model_hp_conv2d_fixed_padding: {"use_bias": false, "filters": 256, "initializer": "trun     cated_normal", "stride": 1}
++         string bias_term=(layer_param.scale_param().bias_term()==true)?"true":"false";
++         LOG_IF(INFO, Caffe::root_solver())
++             << prefix << mlperf_tag << ": " << "{" 
++             << "\"use_bias\": " << bias_term << ", " 
++             << "\"filters\": " << layer_param.convolution_param().num_output() << ", "
++             << "\"initializer\": " << "\"truncated_normal\"" << ", "
++             << "\"stride\": " << layer_param.convolution_param().stride(0)  
++             << "}";
++         LOG_IF(INFO, Caffe::root_solver())
++             << prefix << mlperf_tag << ": " << "\"Top shape " << shape_string << "\"";
++
++      } 
++     
++ }
++
++}
++
+ template <typename Dtype>
+ void Net<Dtype>::Init(const NetParameter& in_param) {
+   CHECK(Caffe::root_solver() || root_net_)
+@@ -260,12 +311,11 @@ void Net<Dtype>::Init(const NetParameter& in_param) {
+     layer_names_.push_back(layer_param.name());
+     LOG_IF(INFO, Caffe::root_solver())
+         << "Creating Layer " << layer_param.name();
+-    bool need_backward = false;
++     bool need_backward = false;
+ 
+     // Figure out this layer's input and output
+     for (int bottom_id = 0; bottom_id < layer_param.bottom_size();
+-         ++bottom_id) {
+-      const int blob_id = AppendBottom(param, layer_id, bottom_id,
++         ++bottom_id) { const int blob_id = AppendBottom(param, layer_id, bottom_id,
+                                        &available_blobs, &blob_name_to_idx);
+       // If a blob needs backward, this layer should provide it.
+       need_backward |= blob_need_backward_[blob_id];
+@@ -323,10 +373,13 @@ void Net<Dtype>::Init(const NetParameter& in_param) {
+         LOG(INFO) << "Created top blob " << top_id << " (shape: "
+             << this_top[top_id]->shape_string() <<  ") for shared layer "
+             << layer_param.name();
++               
+       }
+     } else {
+       layers_[layer_id]->SetUp(bottom_vecs_[layer_id], top_vecs_[layer_id]);
+     }
++
++
+     LOG_IF(INFO, Caffe::root_solver())
+         << "Setting up " << layer_names_[layer_id];
+     for (int top_id = 0; top_id < top_vecs_[layer_id].size(); ++top_id) {
+@@ -336,12 +389,18 @@ void Net<Dtype>::Init(const NetParameter& in_param) {
+       blob_loss_weights_[top_id_vecs_[layer_id][top_id]] = layer->loss(top_id);
+       LOG_IF(INFO, Caffe::root_solver())
+           << "Top shape: " << top_vecs_[layer_id][top_id]->shape_string();
++      MLPerfLog(layer_param, top_vecs_[layer_id][top_id]->shape_string());
++      
+       if (layer->loss(top_id)) {
+         LOG_IF(INFO, Caffe::root_solver())
+             << "    with loss weight " << layer->loss(top_id);
+       }
+       memory_used_ += top_vecs_[layer_id][top_id]->count();
+     }
++
++    
++
++
+     LOG_IF(INFO, Caffe::root_solver())
+         << "Memory required for data: " << memory_used_ * sizeof(Dtype);
+     const int param_size = layer_param.param_size();
+diff --git a/src/caffe/solver.cpp b/src/caffe/solver.cpp
+index 5f5dd8e..18cc2f2 100644
+--- a/src/caffe/solver.cpp
++++ b/src/caffe/solver.cpp
+@@ -96,6 +96,7 @@ Solver<Dtype>::Solver(const string& param_file, const Solver* root_solver)
+ 
+ template <typename Dtype>
+ void Solver<Dtype>::Init(const SolverParameter& param) {
++  string prefix="MLPerf: ";
+   CHECK(Caffe::root_solver() || root_solver_)
+       << "root_solver_ needs to be set for all non-root solvers";
+   param_ = param;
+@@ -113,6 +114,7 @@ void Solver<Dtype>::Init(const SolverParameter& param) {
+ #endif
+   if (Caffe::root_solver() && param_.random_seed() >= 0) {
+     Caffe::set_random_seed(param_.random_seed());
++    LOG(INFO) << prefix << "run_set_random_seed: " << param_.random_seed();
+   }
+   // Scaffolding code
+   InitTrainNet();
+@@ -281,6 +283,10 @@ void Solver<Dtype>::Step(int iters) {
+   losses_.clear();
+   smoothed_loss_ = 0;
+ 
++  string prefix="MLPerf: ";
++  LOG(INFO) << prefix << "train_loop"; 
++
++  
+   while (iter_ < stop_iter) {
+     if (param_.test_interval() && (iter_ - param_.test_offset()) % param_.test_interval() == 0
+         && (iter_ > 0 || param_.test_initialization())
+@@ -470,11 +476,14 @@ void Solver<Dtype>::TestAll() {
+ 
+ template <typename Dtype>
+ void Solver<Dtype>::TestClassification(const int test_net_id) {
+-  CHECK(Caffe::root_solver());
++    CHECK(Caffe::root_solver());
+   LOG(INFO) << "Iteration " << iter_
+             << ", Testing net (#" << test_net_id << ")";
+   CHECK_NOTNULL(test_nets_[test_net_id].get())->
+       ShareTrainedLayersWith(net_.get());
++  string prefix="MLPerf: ";
++  LOG(INFO) << prefix << "eval_start"; 
++
+   vector<Dtype> test_score;
+   vector<int> test_score_output_id;
+   const shared_ptr<Net<Dtype> >& test_net = test_nets_[test_net_id];
+@@ -547,6 +556,8 @@ void Solver<Dtype>::TestClassification(const int test_net_id) {
+   mn::allreduce(test_score.data(), test_score.size());
+   if (mn::is_root())
+ #endif /* USE_MLSL */
++  LOG(INFO) << prefix << "eval_stop"; 
++  LOG(INFO) << prefix << "eval_size: " << global_test_iter; 
+   for (int i = 0; i < test_score.size(); ++i) {
+     const int output_blob_index =
+         test_net->output_blob_indices()[test_score_output_id[i]];
+@@ -561,6 +572,10 @@ void Solver<Dtype>::TestClassification(const int test_net_id) {
+     }
+     LOG(INFO) << "    Test net output #" << i << ": " << output_name << " = "
+               << mean_score << loss_msg_stream.str();
++    if (i == 0){
++       LOG(INFO) << prefix << "eval_accuracy: " << mean_score; 
++       LOG(INFO) << prefix << "eval_target: " << 0.749; 
++    }
+   }
+ }
+ 
+diff --git a/tools/caffe.cpp b/tools/caffe.cpp
+index 9ec4285..5d35368 100644
+--- a/tools/caffe.cpp
++++ b/tools/caffe.cpp
+@@ -244,6 +244,8 @@ caffe::SolverAction::Enum GetRequestedAction(
+ 
+ // Train / Finetune a model.
+ int train() {
++  string prefix="MLPerf: ";
++  LOG(INFO) << prefix << "  run_start";
+   CHECK_GT(FLAGS_solver.size(), 0) << "Need a solver definition to train.";
+   CHECK(!FLAGS_snapshot.size() || !FLAGS_weights.size())
+       << "Give a snapshot to resume training or weights to finetune "
+@@ -345,6 +347,8 @@ int train() {
+     solver->Solve();
+   }
+   LOG(INFO) << "Optimization Done.";
++  LOG(INFO) << prefix << "run_stop: {\"success\": true }";
++  LOG(INFO) << prefix << "run_final";
+   return 0;
+ }
+ RegisterBrewFunction(train);

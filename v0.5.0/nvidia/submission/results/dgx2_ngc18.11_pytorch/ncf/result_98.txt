@@ -1,0 +1,439 @@
+Beginning trial 98 of 100
+Clearing caches
+
+:::MLPv0.5.0 ncf 1541746046.907735825 (<string>:1) run_clear_caches
+Launching on node xpl-dvt-55
++ pids+=($!)
++ set +x
+++ eval echo
++++ echo
++ docker exec -e DGXSYSTEM=DGX2 -e 'SEED=     1396000' -e MULTI_NODE= -e SLURM_JOB_ID=181108205315 -e SLURM_NTASKS_PER_NODE= cont_181108205315 ./run_and_time.sh
+Run vars: id 181108205315 gpus 16 mparams 
++ echo 'running benchmark'
++ DATASET_DIR=/data/ml-20m
++ SEED='     1396000'
+STARTING TIMING RUN AT 2018-11-09 06:47:27 AM
+running benchmark
++ python -m torch.distributed.launch --nproc_per_node=16 ncf.py /data/ml-20m -l 0.0045 -b 1048576 -b1 0.25 -b2 0.5 --eps 1e-8 --valid-batch-size 1048576 --loss-scale 8192 --layers 256 256 128 64 -f 64 --seed 1396000 --threshold 0.635 --fp16
+Using seed = 1396000
+Saving config and results to ./run/neumf/1541746063.0
+
+:::MLPv0.5.0 ncf 1541746063.010091305 (ncf.py:228) preproc_hp_num_eval: 999
+
+:::MLPv0.5.0 ncf 1541746063.010587931 (ncf.py:230) preproc_hp_sample_eval_replacement: true
+
+:::MLPv0.5.0 ncf 1541746063.010872841 (ncf.py:231) input_hp_sample_train_replacement
+
+:::MLPv0.5.0 ncf 1541746063.011127710 (ncf.py:232) input_step_eval_neg_gen
+
+:::MLPv0.5.0 ncf 1541746082.484739780 (ncf.py:242) run_start
+
+:::MLPv0.5.0 ncf 1541746084.187479734 (ncf.py:257) input_size: 19861770
+
+:::MLPv0.5.0 ncf 1541746085.353615761 (ncf.py:312) input_batch_size: 1048576
+
+:::MLPv0.5.0 ncf 1541746085.353981495 (ncf.py:313) input_order
+Load data done [2.9 s]. #user=138493, #item=26744, #train=19861770, #test=138493
+
+:::MLPv0.5.0 ncf 1541746085.354684830 (/workspace/recommendation/neumf.py:49) model_hp_mf_dim
+
+:::MLPv0.5.0 ncf 1541746085.624453306 (/workspace/recommendation/neumf.py:57) model_hp_mlp_layer_sizes: [256, 256, 128, 64]
+NeuMF(
+  (mf_user_embed): Embedding(138493, 64)
+  (mf_item_embed): Embedding(26744, 64)
+  (mlp_user_embed): Embedding(138493, 128)
+  (mlp_item_embed): Embedding(26744, 128)
+  (mlp): ModuleList(
+    (0): Linear(in_features=256, out_features=256, bias=True)
+    (1): Linear(in_features=256, out_features=128, bias=True)
+    (2): Linear(in_features=128, out_features=64, bias=True)
+  )
+  (final): Linear(in_features=128, out_features=1, bias=True)
+)
+31832577 parameters
+Initializing fp16 optimizer
+Reset fp16 grad
+Initializing fp32 clone weights
+
+:::MLPv0.5.0 ncf 1541746088.071173906 (ncf.py:346) opt_learning_rate: 0.0045
+
+:::MLPv0.5.0 ncf 1541746088.082065344 (ncf.py:347) opt_name: "Adam"
+
+:::MLPv0.5.0 ncf 1541746088.085082531 (ncf.py:348) opt_hp_Adam_beta1: 0.25
+
+:::MLPv0.5.0 ncf 1541746088.087873459 (ncf.py:349) opt_hp_Adam_beta2: 0.5
+
+:::MLPv0.5.0 ncf 1541746088.090627670 (ncf.py:350) opt_hp_Adam_epsilon: 1e-08
+
+:::MLPv0.5.0 ncf 1541746088.093431473 (ncf.py:351) model_hp_loss_fn: "binary_cross_entropy"
+
+:::MLPv0.5.0 ncf 1541746089.636717319 (ncf.py:152) eval_size: {"epoch": null, "value": 138493000}
+
+:::MLPv0.5.0 ncf 1541746089.637193680 (ncf.py:153) eval_hp_num_users: 138493
+
+:::MLPv0.5.0 ncf 1541746089.637473106 (ncf.py:154) eval_hp_num_neg: 999
+Initial HR@10 = 0.0040, NDCG@10 = 0.0023
+
+:::MLPv0.5.0 ncf 1541746089.643421888 (ncf.py:376) train_loop
+
+:::MLPv0.5.0 ncf 1541746089.643755436 (ncf.py:379) train_epoch: 0
+
+:::MLPv0.5.0 ncf 1541746089.644063950 (ncf.py:380) input_hp_num_neg: 4
+
+:::MLPv0.5.0 ncf 1541746089.644323111 (ncf.py:381) input_step_train_neg_gen
+  0%|          | 0/95 [00:00<?, ?it/s]  1%|          | 1/95 [00:01<02:28,  1.58s/it] 15%|█▍        | 14/95 [00:01<00:09,  8.32it/s] 32%|███▏      | 30/95 [00:01<00:03, 16.78it/s] 48%|████▊     | 46/95 [00:01<00:02, 24.29it/s] 65%|██████▌   | 62/95 [00:01<00:01, 31.01it/s] 82%|████████▏ | 78/95 [00:02<00:00, 37.08it/s] 99%|█████████▉| 94/95 [00:02<00:00, 42.55it/s]100%|██████████| 95/95 [00:02<00:00, 42.88it/s]
+
+:::MLPv0.5.0 ncf 1541746092.299309969 (ncf.py:438) eval_start
+
+:::MLPv0.5.0 ncf 1541746092.442456484 (ncf.py:152) eval_size: {"epoch": 0, "value": 138493000}
+
+:::MLPv0.5.0 ncf 1541746092.442849636 (ncf.py:153) eval_hp_num_users: 138493
+
+:::MLPv0.5.0 ncf 1541746092.443173409 (ncf.py:154) eval_hp_num_neg: 999
+Epoch 0: HR@10 = 0.4292, NDCG@10 = 0.2433, train_time = 2.65, val_time = 0.15
+
+:::MLPv0.5.0 ncf 1541746092.444424391 (ncf.py:450) eval_accuracy: {"epoch": 0, "value": 0.42921302881734097}
+
+:::MLPv0.5.0 ncf 1541746092.444771051 (ncf.py:451) eval_target: 0.635
+
+:::MLPv0.5.0 ncf 1541746092.445069790 (ncf.py:452) eval_stop
+
+:::MLPv0.5.0 ncf 1541746092.445376396 (ncf.py:379) train_epoch: 1
+
+:::MLPv0.5.0 ncf 1541746092.445669651 (ncf.py:380) input_hp_num_neg: 4
+
+:::MLPv0.5.0 ncf 1541746092.445921183 (ncf.py:381) input_step_train_neg_gen
+  0%|          | 0/95 [00:00<?, ?it/s] 14%|█▎        | 13/95 [00:00<00:00, 124.50it/s] 31%|███       | 29/95 [00:00<00:00, 139.05it/s] 47%|████▋     | 45/95 [00:00<00:00, 143.84it/s] 64%|██████▍   | 61/95 [00:00<00:00, 146.32it/s] 80%|████████  | 76/95 [00:00<00:00, 145.90it/s] 97%|█████████▋| 92/95 [00:00<00:00, 147.15it/s]100%|██████████| 95/95 [00:00<00:00, 147.35it/s]
+
+:::MLPv0.5.0 ncf 1541746093.287212849 (ncf.py:438) eval_start
+
+:::MLPv0.5.0 ncf 1541746093.429918289 (ncf.py:152) eval_size: {"epoch": 1, "value": 138493000}
+
+:::MLPv0.5.0 ncf 1541746093.430284739 (ncf.py:153) eval_hp_num_users: 138493
+
+:::MLPv0.5.0 ncf 1541746093.430603027 (ncf.py:154) eval_hp_num_neg: 999
+Epoch 1: HR@10 = 0.4832, NDCG@10 = 0.2740, train_time = 0.84, val_time = 0.14
+
+:::MLPv0.5.0 ncf 1541746093.431653976 (ncf.py:450) eval_accuracy: {"epoch": 1, "value": 0.483179655289437}
+
+:::MLPv0.5.0 ncf 1541746093.431981802 (ncf.py:451) eval_target: 0.635
+
+:::MLPv0.5.0 ncf 1541746093.432269812 (ncf.py:452) eval_stop
+
+:::MLPv0.5.0 ncf 1541746093.432567835 (ncf.py:379) train_epoch: 2
+
+:::MLPv0.5.0 ncf 1541746093.432856798 (ncf.py:380) input_hp_num_neg: 4
+
+:::MLPv0.5.0 ncf 1541746093.433102131 (ncf.py:381) input_step_train_neg_gen
+  0%|          | 0/95 [00:00<?, ?it/s] 14%|█▎        | 13/95 [00:00<00:00, 125.63it/s] 29%|██▉       | 28/95 [00:00<00:00, 134.72it/s] 46%|████▋     | 44/95 [00:00<00:00, 140.31it/s] 63%|██████▎   | 60/95 [00:00<00:00, 142.92it/s] 79%|███████▉  | 75/95 [00:00<00:00, 144.04it/s] 96%|█████████▌| 91/95 [00:00<00:00, 145.20it/s]100%|██████████| 95/95 [00:00<00:00, 145.27it/s]
+
+:::MLPv0.5.0 ncf 1541746094.256193161 (ncf.py:438) eval_start
+
+:::MLPv0.5.0 ncf 1541746094.398891211 (ncf.py:152) eval_size: {"epoch": 2, "value": 138493000}
+
+:::MLPv0.5.0 ncf 1541746094.399252892 (ncf.py:153) eval_hp_num_users: 138493
+
+:::MLPv0.5.0 ncf 1541746094.399548054 (ncf.py:154) eval_hp_num_neg: 999
+Epoch 2: HR@10 = 0.5401, NDCG@10 = 0.3088, train_time = 0.82, val_time = 0.14
+
+:::MLPv0.5.0 ncf 1541746094.400453091 (ncf.py:450) eval_accuracy: {"epoch": 2, "value": 0.5400706172875164}
+
+:::MLPv0.5.0 ncf 1541746094.400782585 (ncf.py:451) eval_target: 0.635
+
+:::MLPv0.5.0 ncf 1541746094.401076794 (ncf.py:452) eval_stop
+
+:::MLPv0.5.0 ncf 1541746094.401378870 (ncf.py:379) train_epoch: 3
+
+:::MLPv0.5.0 ncf 1541746094.401667595 (ncf.py:380) input_hp_num_neg: 4
+
+:::MLPv0.5.0 ncf 1541746094.401930571 (ncf.py:381) input_step_train_neg_gen
+  0%|          | 0/95 [00:00<?, ?it/s] 14%|█▎        | 13/95 [00:00<00:00, 125.96it/s] 31%|███       | 29/95 [00:00<00:00, 138.33it/s] 47%|████▋     | 45/95 [00:00<00:00, 142.39it/s] 63%|██████▎   | 60/95 [00:00<00:00, 142.72it/s] 79%|███████▉  | 75/95 [00:00<00:00, 143.79it/s] 96%|█████████▌| 91/95 [00:00<00:00, 145.35it/s]100%|██████████| 95/95 [00:00<00:00, 145.40it/s]
+
+:::MLPv0.5.0 ncf 1541746095.224901199 (ncf.py:438) eval_start
+
+:::MLPv0.5.0 ncf 1541746095.367409229 (ncf.py:152) eval_size: {"epoch": 3, "value": 138493000}
+
+:::MLPv0.5.0 ncf 1541746095.367755890 (ncf.py:153) eval_hp_num_users: 138493
+
+:::MLPv0.5.0 ncf 1541746095.368101835 (ncf.py:154) eval_hp_num_neg: 999
+Epoch 3: HR@10 = 0.5547, NDCG@10 = 0.3212, train_time = 0.82, val_time = 0.14
+
+:::MLPv0.5.0 ncf 1541746095.368857622 (ncf.py:450) eval_accuracy: {"epoch": 3, "value": 0.5546778537543414}
+
+:::MLPv0.5.0 ncf 1541746095.369177580 (ncf.py:451) eval_target: 0.635
+
+:::MLPv0.5.0 ncf 1541746095.369465590 (ncf.py:452) eval_stop
+
+:::MLPv0.5.0 ncf 1541746095.369763136 (ncf.py:379) train_epoch: 4
+
+:::MLPv0.5.0 ncf 1541746095.370052099 (ncf.py:380) input_hp_num_neg: 4
+
+:::MLPv0.5.0 ncf 1541746095.370302916 (ncf.py:381) input_step_train_neg_gen
+  0%|          | 0/95 [00:00<?, ?it/s] 14%|█▎        | 13/95 [00:00<00:00, 126.11it/s] 31%|███       | 29/95 [00:00<00:00, 138.54it/s] 46%|████▋     | 44/95 [00:00<00:00, 141.73it/s] 63%|██████▎   | 60/95 [00:00<00:00, 144.71it/s] 80%|████████  | 76/95 [00:00<00:00, 145.91it/s] 97%|█████████▋| 92/95 [00:00<00:00, 146.90it/s]100%|██████████| 95/95 [00:00<00:00, 147.01it/s]
+
+:::MLPv0.5.0 ncf 1541746096.185239553 (ncf.py:438) eval_start
+
+:::MLPv0.5.0 ncf 1541746096.328791142 (ncf.py:152) eval_size: {"epoch": 4, "value": 138493000}
+
+:::MLPv0.5.0 ncf 1541746096.329155922 (ncf.py:153) eval_hp_num_users: 138493
+
+:::MLPv0.5.0 ncf 1541746096.329505682 (ncf.py:154) eval_hp_num_neg: 999
+Epoch 4: HR@10 = 0.5820, NDCG@10 = 0.3399, train_time = 0.81, val_time = 0.15
+
+:::MLPv0.5.0 ncf 1541746096.330399036 (ncf.py:450) eval_accuracy: {"epoch": 4, "value": 0.5820005343230343}
+
+:::MLPv0.5.0 ncf 1541746096.330742359 (ncf.py:451) eval_target: 0.635
+
+:::MLPv0.5.0 ncf 1541746096.331043959 (ncf.py:452) eval_stop
+
+:::MLPv0.5.0 ncf 1541746096.331338406 (ncf.py:379) train_epoch: 5
+
+:::MLPv0.5.0 ncf 1541746096.331630230 (ncf.py:380) input_hp_num_neg: 4
+
+:::MLPv0.5.0 ncf 1541746096.331883669 (ncf.py:381) input_step_train_neg_gen
+  0%|          | 0/95 [00:00<?, ?it/s] 14%|█▎        | 13/95 [00:00<00:00, 123.07it/s] 29%|██▉       | 28/95 [00:00<00:00, 135.61it/s] 46%|████▋     | 44/95 [00:00<00:00, 140.90it/s] 63%|██████▎   | 60/95 [00:00<00:00, 143.56it/s] 80%|████████  | 76/95 [00:00<00:00, 144.99it/s] 97%|█████████▋| 92/95 [00:00<00:00, 145.99it/s]100%|██████████| 95/95 [00:00<00:00, 146.23it/s]
+
+:::MLPv0.5.0 ncf 1541746097.150697231 (ncf.py:438) eval_start
+
+:::MLPv0.5.0 ncf 1541746097.293277025 (ncf.py:152) eval_size: {"epoch": 5, "value": 138493000}
+
+:::MLPv0.5.0 ncf 1541746097.293668747 (ncf.py:153) eval_hp_num_users: 138493
+
+:::MLPv0.5.0 ncf 1541746097.294012308 (ncf.py:154) eval_hp_num_neg: 999
+Epoch 5: HR@10 = 0.5779, NDCG@10 = 0.3381, train_time = 0.82, val_time = 0.14
+
+:::MLPv0.5.0 ncf 1541746097.295066833 (ncf.py:450) eval_accuracy: {"epoch": 5, "value": 0.5779136851682034}
+
+:::MLPv0.5.0 ncf 1541746097.295412302 (ncf.py:451) eval_target: 0.635
+
+:::MLPv0.5.0 ncf 1541746097.295694113 (ncf.py:452) eval_stop
+
+:::MLPv0.5.0 ncf 1541746097.295980692 (ncf.py:379) train_epoch: 6
+
+:::MLPv0.5.0 ncf 1541746097.296259403 (ncf.py:380) input_hp_num_neg: 4
+
+:::MLPv0.5.0 ncf 1541746097.296506882 (ncf.py:381) input_step_train_neg_gen
+  0%|          | 0/95 [00:00<?, ?it/s] 14%|█▎        | 13/95 [00:00<00:00, 124.41it/s] 31%|███       | 29/95 [00:00<00:00, 139.04it/s] 47%|████▋     | 45/95 [00:00<00:00, 142.79it/s] 63%|██████▎   | 60/95 [00:00<00:00, 144.44it/s] 79%|███████▉  | 75/95 [00:00<00:00, 145.50it/s] 95%|█████████▍| 90/95 [00:00<00:00, 146.08it/s]100%|██████████| 95/95 [00:00<00:00, 145.52it/s]
+
+:::MLPv0.5.0 ncf 1541746098.118319511 (ncf.py:438) eval_start
+
+:::MLPv0.5.0 ncf 1541746098.260542393 (ncf.py:152) eval_size: {"epoch": 6, "value": 138493000}
+
+:::MLPv0.5.0 ncf 1541746098.260922670 (ncf.py:153) eval_hp_num_users: 138493
+
+:::MLPv0.5.0 ncf 1541746098.261232138 (ncf.py:154) eval_hp_num_neg: 999
+Epoch 6: HR@10 = 0.6021, NDCG@10 = 0.3549, train_time = 0.82, val_time = 0.14
+
+:::MLPv0.5.0 ncf 1541746098.261983395 (ncf.py:450) eval_accuracy: {"epoch": 6, "value": 0.6021098539276354}
+
+:::MLPv0.5.0 ncf 1541746098.262311935 (ncf.py:451) eval_target: 0.635
+
+:::MLPv0.5.0 ncf 1541746098.262606859 (ncf.py:452) eval_stop
+
+:::MLPv0.5.0 ncf 1541746098.262892008 (ncf.py:379) train_epoch: 7
+
+:::MLPv0.5.0 ncf 1541746098.263199329 (ncf.py:380) input_hp_num_neg: 4
+
+:::MLPv0.5.0 ncf 1541746098.263452053 (ncf.py:381) input_step_train_neg_gen
+  0%|          | 0/95 [00:00<?, ?it/s] 14%|█▎        | 13/95 [00:00<00:00, 126.96it/s] 29%|██▉       | 28/95 [00:00<00:00, 136.86it/s] 46%|████▋     | 44/95 [00:00<00:00, 142.25it/s] 63%|██████▎   | 60/95 [00:00<00:00, 144.54it/s] 80%|████████  | 76/95 [00:00<00:00, 145.92it/s] 97%|█████████▋| 92/95 [00:00<00:00, 146.81it/s]100%|██████████| 95/95 [00:00<00:00, 147.03it/s]
+
+:::MLPv0.5.0 ncf 1541746099.078458071 (ncf.py:438) eval_start
+
+:::MLPv0.5.0 ncf 1541746099.221101999 (ncf.py:152) eval_size: {"epoch": 7, "value": 138493000}
+
+:::MLPv0.5.0 ncf 1541746099.221457720 (ncf.py:153) eval_hp_num_users: 138493
+
+:::MLPv0.5.0 ncf 1541746099.221767426 (ncf.py:154) eval_hp_num_neg: 999
+Epoch 7: HR@10 = 0.6083, NDCG@10 = 0.3602, train_time = 0.81, val_time = 0.14
+
+:::MLPv0.5.0 ncf 1541746099.222665071 (ncf.py:450) eval_accuracy: {"epoch": 7, "value": 0.6082690099860643}
+
+:::MLPv0.5.0 ncf 1541746099.222995281 (ncf.py:451) eval_target: 0.635
+
+:::MLPv0.5.0 ncf 1541746099.223292828 (ncf.py:452) eval_stop
+
+:::MLPv0.5.0 ncf 1541746099.223576307 (ncf.py:379) train_epoch: 8
+
+:::MLPv0.5.0 ncf 1541746099.223869801 (ncf.py:380) input_hp_num_neg: 4
+
+:::MLPv0.5.0 ncf 1541746099.224121094 (ncf.py:381) input_step_train_neg_gen
+  0%|          | 0/95 [00:00<?, ?it/s] 14%|█▎        | 13/95 [00:00<00:00, 124.38it/s] 29%|██▉       | 28/95 [00:00<00:00, 136.70it/s] 46%|████▋     | 44/95 [00:00<00:00, 142.42it/s] 63%|██████▎   | 60/95 [00:00<00:00, 144.26it/s] 80%|████████  | 76/95 [00:00<00:00, 145.94it/s] 97%|█████████▋| 92/95 [00:00<00:00, 146.74it/s]100%|██████████| 95/95 [00:00<00:00, 146.96it/s]
+
+:::MLPv0.5.0 ncf 1541746100.038879156 (ncf.py:438) eval_start
+
+:::MLPv0.5.0 ncf 1541746100.181647539 (ncf.py:152) eval_size: {"epoch": 8, "value": 138493000}
+
+:::MLPv0.5.0 ncf 1541746100.182005644 (ncf.py:153) eval_hp_num_users: 138493
+
+:::MLPv0.5.0 ncf 1541746100.182314157 (ncf.py:154) eval_hp_num_neg: 999
+Epoch 8: HR@10 = 0.6119, NDCG@10 = 0.3608, train_time = 0.81, val_time = 0.14
+
+:::MLPv0.5.0 ncf 1541746100.183347940 (ncf.py:450) eval_accuracy: {"epoch": 8, "value": 0.6119226242481569}
+
+:::MLPv0.5.0 ncf 1541746100.183696985 (ncf.py:451) eval_target: 0.635
+
+:::MLPv0.5.0 ncf 1541746100.184013605 (ncf.py:452) eval_stop
+
+:::MLPv0.5.0 ncf 1541746100.184326887 (ncf.py:379) train_epoch: 9
+
+:::MLPv0.5.0 ncf 1541746100.184624195 (ncf.py:380) input_hp_num_neg: 4
+
+:::MLPv0.5.0 ncf 1541746100.184882164 (ncf.py:381) input_step_train_neg_gen
+  0%|          | 0/95 [00:00<?, ?it/s] 14%|█▎        | 13/95 [00:00<00:00, 125.95it/s] 31%|███       | 29/95 [00:00<00:00, 138.97it/s] 47%|████▋     | 45/95 [00:00<00:00, 142.45it/s] 64%|██████▍   | 61/95 [00:00<00:00, 145.04it/s] 80%|████████  | 76/95 [00:00<00:00, 145.81it/s] 97%|█████████▋| 92/95 [00:00<00:00, 147.09it/s]100%|██████████| 95/95 [00:00<00:00, 147.28it/s]
+
+:::MLPv0.5.0 ncf 1541746100.999663115 (ncf.py:438) eval_start
+
+:::MLPv0.5.0 ncf 1541746101.142370462 (ncf.py:152) eval_size: {"epoch": 9, "value": 138493000}
+
+:::MLPv0.5.0 ncf 1541746101.142709017 (ncf.py:153) eval_hp_num_users: 138493
+
+:::MLPv0.5.0 ncf 1541746101.142991543 (ncf.py:154) eval_hp_num_neg: 999
+Epoch 9: HR@10 = 0.6200, NDCG@10 = 0.3647, train_time = 0.81, val_time = 0.14
+
+:::MLPv0.5.0 ncf 1541746101.143667698 (ncf.py:450) eval_accuracy: {"epoch": 9, "value": 0.6200168961608168}
+
+:::MLPv0.5.0 ncf 1541746101.143990993 (ncf.py:451) eval_target: 0.635
+
+:::MLPv0.5.0 ncf 1541746101.144279003 (ncf.py:452) eval_stop
+
+:::MLPv0.5.0 ncf 1541746101.144572258 (ncf.py:379) train_epoch: 10
+
+:::MLPv0.5.0 ncf 1541746101.144857883 (ncf.py:380) input_hp_num_neg: 4
+
+:::MLPv0.5.0 ncf 1541746101.145115614 (ncf.py:381) input_step_train_neg_gen
+  0%|          | 0/95 [00:00<?, ?it/s] 14%|█▎        | 13/95 [00:00<00:00, 124.96it/s] 29%|██▉       | 28/95 [00:00<00:00, 136.82it/s] 46%|████▋     | 44/95 [00:00<00:00, 141.33it/s] 62%|██████▏   | 59/95 [00:00<00:00, 143.19it/s] 79%|███████▉  | 75/95 [00:00<00:00, 145.42it/s] 96%|█████████▌| 91/95 [00:00<00:00, 146.44it/s]100%|██████████| 95/95 [00:00<00:00, 146.74it/s]
+
+:::MLPv0.5.0 ncf 1541746101.960761070 (ncf.py:438) eval_start
+
+:::MLPv0.5.0 ncf 1541746102.103223085 (ncf.py:152) eval_size: {"epoch": 10, "value": 138493000}
+
+:::MLPv0.5.0 ncf 1541746102.103571415 (ncf.py:153) eval_hp_num_users: 138493
+
+:::MLPv0.5.0 ncf 1541746102.103876352 (ncf.py:154) eval_hp_num_neg: 999
+Epoch 10: HR@10 = 0.6290, NDCG@10 = 0.3729, train_time = 0.82, val_time = 0.14
+
+:::MLPv0.5.0 ncf 1541746102.104689360 (ncf.py:450) eval_accuracy: {"epoch": 10, "value": 0.6290354025113183}
+
+:::MLPv0.5.0 ncf 1541746102.105022192 (ncf.py:451) eval_target: 0.635
+
+:::MLPv0.5.0 ncf 1541746102.105323076 (ncf.py:452) eval_stop
+
+:::MLPv0.5.0 ncf 1541746102.105618000 (ncf.py:379) train_epoch: 11
+
+:::MLPv0.5.0 ncf 1541746102.105902672 (ncf.py:380) input_hp_num_neg: 4
+
+:::MLPv0.5.0 ncf 1541746102.106150389 (ncf.py:381) input_step_train_neg_gen
+  0%|          | 0/95 [00:00<?, ?it/s] 14%|█▎        | 13/95 [00:00<00:00, 125.04it/s] 29%|██▉       | 28/95 [00:00<00:00, 135.40it/s] 46%|████▋     | 44/95 [00:00<00:00, 141.35it/s] 62%|██████▏   | 59/95 [00:00<00:00, 142.92it/s] 79%|███████▉  | 75/95 [00:00<00:00, 144.48it/s] 96%|█████████▌| 91/95 [00:00<00:00, 145.97it/s]100%|██████████| 95/95 [00:00<00:00, 146.21it/s]
+
+:::MLPv0.5.0 ncf 1541746102.923935652 (ncf.py:438) eval_start
+
+:::MLPv0.5.0 ncf 1541746103.066467047 (ncf.py:152) eval_size: {"epoch": 11, "value": 138493000}
+
+:::MLPv0.5.0 ncf 1541746103.066806316 (ncf.py:153) eval_hp_num_users: 138493
+
+:::MLPv0.5.0 ncf 1541746103.067108393 (ncf.py:154) eval_hp_num_neg: 999
+Epoch 11: HR@10 = 0.6271, NDCG@10 = 0.3701, train_time = 0.82, val_time = 0.15
+
+:::MLPv0.5.0 ncf 1541746103.069161654 (ncf.py:450) eval_accuracy: {"epoch": 11, "value": 0.627085845493996}
+
+:::MLPv0.5.0 ncf 1541746103.069488525 (ncf.py:451) eval_target: 0.635
+
+:::MLPv0.5.0 ncf 1541746103.069771767 (ncf.py:452) eval_stop
+
+:::MLPv0.5.0 ncf 1541746103.070070982 (ncf.py:379) train_epoch: 12
+
+:::MLPv0.5.0 ncf 1541746103.070350885 (ncf.py:380) input_hp_num_neg: 4
+
+:::MLPv0.5.0 ncf 1541746103.070596695 (ncf.py:381) input_step_train_neg_gen
+  0%|          | 0/95 [00:00<?, ?it/s] 14%|█▎        | 13/95 [00:00<00:00, 124.02it/s] 29%|██▉       | 28/95 [00:00<00:00, 134.06it/s] 46%|████▋     | 44/95 [00:00<00:00, 140.07it/s] 63%|██████▎   | 60/95 [00:00<00:00, 143.41it/s] 80%|████████  | 76/95 [00:00<00:00, 145.14it/s] 96%|█████████▌| 91/95 [00:00<00:00, 145.38it/s]100%|██████████| 95/95 [00:00<00:00, 145.20it/s]
+
+:::MLPv0.5.0 ncf 1541746103.893516064 (ncf.py:438) eval_start
+
+:::MLPv0.5.0 ncf 1541746104.036298752 (ncf.py:152) eval_size: {"epoch": 12, "value": 138493000}
+
+:::MLPv0.5.0 ncf 1541746104.036681890 (ncf.py:153) eval_hp_num_users: 138493
+
+:::MLPv0.5.0 ncf 1541746104.037009716 (ncf.py:154) eval_hp_num_neg: 999
+Epoch 12: HR@10 = 0.6289, NDCG@10 = 0.3720, train_time = 0.82, val_time = 0.14
+
+:::MLPv0.5.0 ncf 1541746104.037649632 (ncf.py:450) eval_accuracy: {"epoch": 12, "value": 0.6289126526250424}
+
+:::MLPv0.5.0 ncf 1541746104.038018227 (ncf.py:451) eval_target: 0.635
+
+:::MLPv0.5.0 ncf 1541746104.038316250 (ncf.py:452) eval_stop
+
+:::MLPv0.5.0 ncf 1541746104.038610458 (ncf.py:379) train_epoch: 13
+
+:::MLPv0.5.0 ncf 1541746104.038898468 (ncf.py:380) input_hp_num_neg: 4
+
+:::MLPv0.5.0 ncf 1541746104.039167643 (ncf.py:381) input_step_train_neg_gen
+  0%|          | 0/95 [00:00<?, ?it/s] 14%|█▎        | 13/95 [00:00<00:00, 125.13it/s] 29%|██▉       | 28/95 [00:00<00:00, 134.82it/s] 45%|████▌     | 43/95 [00:00<00:00, 138.75it/s] 62%|██████▏   | 59/95 [00:00<00:00, 142.12it/s] 78%|███████▊  | 74/95 [00:00<00:00, 143.23it/s] 95%|█████████▍| 90/95 [00:00<00:00, 144.45it/s]100%|██████████| 95/95 [00:00<00:00, 144.92it/s]
+
+:::MLPv0.5.0 ncf 1541746104.863751650 (ncf.py:438) eval_start
+
+:::MLPv0.5.0 ncf 1541746105.006230354 (ncf.py:152) eval_size: {"epoch": 13, "value": 138493000}
+
+:::MLPv0.5.0 ncf 1541746105.006579876 (ncf.py:153) eval_hp_num_users: 138493
+
+:::MLPv0.5.0 ncf 1541746105.006883860 (ncf.py:154) eval_hp_num_neg: 999
+Epoch 13: HR@10 = 0.6219, NDCG@10 = 0.3689, train_time = 0.82, val_time = 0.14
+
+:::MLPv0.5.0 ncf 1541746105.007533789 (ncf.py:450) eval_accuracy: {"epoch": 13, "value": 0.6219375708519564}
+
+:::MLPv0.5.0 ncf 1541746105.007864714 (ncf.py:451) eval_target: 0.635
+
+:::MLPv0.5.0 ncf 1541746105.008156776 (ncf.py:452) eval_stop
+
+:::MLPv0.5.0 ncf 1541746105.008440495 (ncf.py:379) train_epoch: 14
+
+:::MLPv0.5.0 ncf 1541746105.008727789 (ncf.py:380) input_hp_num_neg: 4
+
+:::MLPv0.5.0 ncf 1541746105.008983612 (ncf.py:381) input_step_train_neg_gen
+  0%|          | 0/95 [00:00<?, ?it/s] 14%|█▎        | 13/95 [00:00<00:00, 127.55it/s] 31%|███       | 29/95 [00:00<00:00, 139.88it/s] 47%|████▋     | 45/95 [00:00<00:00, 143.70it/s] 64%|██████▍   | 61/95 [00:00<00:00, 145.93it/s] 81%|████████  | 77/95 [00:00<00:00, 147.35it/s] 97%|█████████▋| 92/95 [00:00<00:00, 147.27it/s]100%|██████████| 95/95 [00:00<00:00, 147.46it/s]
+
+:::MLPv0.5.0 ncf 1541746105.821852922 (ncf.py:438) eval_start
+
+:::MLPv0.5.0 ncf 1541746105.964474201 (ncf.py:152) eval_size: {"epoch": 14, "value": 138493000}
+
+:::MLPv0.5.0 ncf 1541746105.964832783 (ncf.py:153) eval_hp_num_users: 138493
+
+:::MLPv0.5.0 ncf 1541746105.965139866 (ncf.py:154) eval_hp_num_neg: 999
+Epoch 14: HR@10 = 0.6323, NDCG@10 = 0.3743, train_time = 0.81, val_time = 0.14
+
+:::MLPv0.5.0 ncf 1541746105.965821981 (ncf.py:450) eval_accuracy: {"epoch": 14, "value": 0.6322918847884008}
+
+:::MLPv0.5.0 ncf 1541746105.966165543 (ncf.py:451) eval_target: 0.635
+
+:::MLPv0.5.0 ncf 1541746105.966462612 (ncf.py:452) eval_stop
+
+:::MLPv0.5.0 ncf 1541746105.966754913 (ncf.py:379) train_epoch: 15
+
+:::MLPv0.5.0 ncf 1541746105.967040062 (ncf.py:380) input_hp_num_neg: 4
+
+:::MLPv0.5.0 ncf 1541746105.967305660 (ncf.py:381) input_step_train_neg_gen
+  0%|          | 0/95 [00:00<?, ?it/s] 14%|█▎        | 13/95 [00:00<00:00, 124.48it/s] 31%|███       | 29/95 [00:00<00:00, 139.04it/s] 47%|████▋     | 45/95 [00:00<00:00, 143.57it/s] 64%|██████▍   | 61/95 [00:00<00:00, 145.90it/s] 81%|████████  | 77/95 [00:00<00:00, 147.24it/s] 98%|█████████▊| 93/95 [00:00<00:00, 147.83it/s]100%|██████████| 95/95 [00:00<00:00, 147.91it/s]
+
+:::MLPv0.5.0 ncf 1541746106.777921438 (ncf.py:438) eval_start
+
+:::MLPv0.5.0 ncf 1541746106.920391083 (ncf.py:152) eval_size: {"epoch": 15, "value": 138493000}
+
+:::MLPv0.5.0 ncf 1541746106.920733929 (ncf.py:153) eval_hp_num_users: 138493
+
+:::MLPv0.5.0 ncf 1541746106.921051741 (ncf.py:154) eval_hp_num_neg: 999
+Epoch 15: HR@10 = 0.6360, NDCG@10 = 0.3793, train_time = 0.81, val_time = 0.14
+
+:::MLPv0.5.0 ncf 1541746106.921938658 (ncf.py:450) eval_accuracy: {"epoch": 15, "value": 0.6360465871921325}
+
+:::MLPv0.5.0 ncf 1541746106.922265291 (ncf.py:451) eval_target: 0.635
+
+:::MLPv0.5.0 ncf 1541746106.922558784 (ncf.py:452) eval_stop
+Hit threshold of 0.635
+
+:::MLPv0.5.0 ncf 1541746106.922854662 (ncf.py:460) run_stop: {"success": true}
+
+:::MLPv0.5.0 ncf 1541746106.923108339 (ncf.py:462) run_final
+mlperf_score 24.437761068344116
++ ret_code=0
++ set +x
+ENDING TIMING RUN AT 2018-11-09 06:48:35 AM
+RESULT,RECOMMENDATION,     1396000,68,nvidia,2018-11-09 06:47:27 AM

@@ -1,0 +1,1289 @@
+Beginning trial 1 of 1
+Clearing caches
+vm.drop_caches = 3
+:::MLPv0.5.0 transformer 1541632763.308311224 (<string>:1) run_clear_caches
+Launching on node sc-sdgx-387
++ pids+=($!)
++ set +x
+++ eval echo srun -N 1 -n 1 -w '$hostn'
++++ echo srun -N 1 -n 1 -w sc-sdgx-387
++ srun -N 1 -n 1 -w sc-sdgx-387 docker exec -e DGXSYSTEM=DGX1 -e MULTI_NODE= -e SEED=32385 -e SLURM_JOB_ID=154759 -e SLURM_NTASKS_PER_NODE=8 -e MODE=TRAIN cont_154759 ./run_and_time.sh
+Run vars: id 154759 gpus 8 mparams 
++ SEED=32385
++ MAX_TOKENS=5120
++ DATASET_DIR=/data
++ MODE=TRAIN
++ case "$MODE" in
++ source run_training.sh
++++ date +%s
+++ START=1541632763
++++ date '+%Y-%m-%d %r'
+STARTING TIMING RUN AT 2018-11-07 11:19:23 PM
+++ START_FMT='2018-11-07 11:19:23 PM'
+++ echo 'STARTING TIMING RUN AT 2018-11-07 11:19:23 PM'
+++ python -m torch.distributed.launch --nproc_per_node 8 train.py /data --seed 32385 --arch transformer_wmt_en_de_big_t2t --share-all-embeddings --optimizer adam --adam-betas '(0.9, 0.997)' --adam-eps 1e-9 --clip-norm 0.0 --lr-scheduler inverse_sqrt --warmup-init-lr 0.0 --warmup-updates 3000 --lr 6.4e-4 --min-lr 0.0 --dropout 0.1 --weight-decay 0.0 --criterion label_smoothed_cross_entropy --label-smoothing 0.1 --max-tokens 5120 --max-epoch 12 --target-bleu 25.0 --ignore-case --no-save --update-freq 1 --fp16 --distributed-init-method env://
+| distributed init (rank 0): env://
+| distributed env init. MASTER_ADDR: 127.0.0.1, MASTER_PORT: 29500, WORLD_SIZE: 8, RANK: 0
+| distributed init (rank 0): env://
+| distributed env init. MASTER_ADDR: 127.0.0.1, MASTER_PORT: 29500, WORLD_SIZE: 8, RANK: 5
+| distributed init (rank 0): env://
+| distributed env init. MASTER_ADDR: 127.0.0.1, MASTER_PORT: 29500, WORLD_SIZE: 8, RANK: 2
+| distributed init (rank 0): env://
+| distributed env init. MASTER_ADDR: 127.0.0.1, MASTER_PORT: 29500, WORLD_SIZE: 8, RANK: 1
+| distributed init (rank 0): env://
+| distributed env init. MASTER_ADDR: 127.0.0.1, MASTER_PORT: 29500, WORLD_SIZE: 8, RANK: 7
+| distributed init (rank 0): env://
+| distributed env init. MASTER_ADDR: 127.0.0.1, MASTER_PORT: 29500, WORLD_SIZE: 8, RANK: 4
+| distributed init (rank 0): env://
+| distributed init (rank 0): env://
+| distributed env init. MASTER_ADDR: 127.0.0.1, MASTER_PORT: 29500, WORLD_SIZE: 8, RANK: 3
+| distributed env init. MASTER_ADDR: 127.0.0.1, MASTER_PORT: 29500, WORLD_SIZE: 8, RANK: 6
+| distributed init done!
+| distributed init done!
+| distributed init done!
+| distributed init done!
+| distributed init done!
+| initialized host sc-sdgx-387 as rank 0 and device id 0
+:::MLPv0.5.0 transformer 1541632766.693253279 (/workspace/translation/train.py:34) run_clear_caches
+| distributed init done!
+| distributed init done!
+| distributed init done!
+:::MLPv0.5.0 transformer 1541632773.629595041 (/workspace/translation/train.py:40) run_start
+Namespace(adam_betas='(0.9, 0.997)', adam_eps=1e-09, adaptive_softmax_cutoff=None, arch='transformer_wmt_en_de_big_t2t', attention_dropout=0.1, beam=4, clip_norm=0.0, cpu=False, criterion='label_smoothed_cross_entropy', data='/data', decoder_attention_heads=16, decoder_embed_dim=1024, decoder_embed_path=None, decoder_ffn_embed_dim=4096, decoder_layers=6, decoder_learned_pos=False, decoder_normalize_before=True, device_id=0, distributed_backend='nccl', distributed_init_method='env://', distributed_port=-1, distributed_rank=0, distributed_world_size=8, dropout=0.1, enable_parallel_backward_allred_opt=False, enable_parallel_backward_allred_opt_correctness_check=False, encoder_attention_heads=16, encoder_embed_dim=1024, encoder_embed_path=None, encoder_ffn_embed_dim=4096, encoder_layers=6, encoder_learned_pos=False, encoder_normalize_before=True, fp16=True, fuse_dropout_add=False, fuse_relu_dropout=False, gen_subset='test', ignore_case=True, keep_interval_updates=-1, label_smoothing=0.1, left_pad_source='True', left_pad_target='False', lenpen=1, local_rank=0, log_format=None, log_interval=1000, log_translations=False, lr=[0.00064], lr_scheduler='inverse_sqrt', lr_shrink=0.1, max_epoch=12, max_len_a=0, max_len_b=200, max_sentences=None, max_sentences_valid=None, max_source_positions=1024, max_target_positions=1024, max_tokens=5120, max_update=0, min_len=1, min_loss_scale=0.0001, min_lr=0.0, model_overrides='{}', momentum=0.99, nbest=1, no_beamable_mm=False, no_early_stop=False, no_epoch_checkpoints=False, no_progress_bar=False, no_save=True, no_token_positional_embeddings=False, num_shards=1, online_eval=False, optimizer='adam', pad_sequence=1, parallel_backward_allred_opt_threshold=0, path=None, prefix_size=0, print_alignment=False, profile=None, quiet=False, raw_text=False, relu_dropout=0.1, remove_bpe=None, replace_unk=None, restore_file='checkpoint_last.pt', sampling=False, sampling_temperature=1, sampling_topk=-1, save_dir='checkpoints', save_interval=1, save_interval_updates=0, score_reference=False, seed=32385, sentence_avg=False, shard_id=0, share_all_embeddings=True, share_decoder_input_output_embed=False, skip_invalid_size_inputs_valid_test=False, source_lang=None, target_bleu=25.0, target_lang=None, task='translation', train_subset='train', unkpen=0, unnormalized=False, update_freq=[1], valid_subset='valid', validate_interval=1, warmup_init_lr=0.0, warmup_updates=3000, weight_decay=0.0)
+:::MLPv0.5.0 transformer 1541632773.631443739 (/workspace/translation/train.py:44) opt_name: "adam"
+:::MLPv0.5.0 transformer 1541632773.632043362 (/workspace/translation/train.py:45) opt_learning_rate: [0.00064]
+:::MLPv0.5.0 transformer 1541632773.632591009 (/workspace/translation/train.py:46) opt_hp_Adam_beta1: 0.9
+:::MLPv0.5.0 transformer 1541632773.632982016 (/workspace/translation/train.py:47) opt_hp_Adam_beta2: 0.997
+:::MLPv0.5.0 transformer 1541632773.633350134 (/workspace/translation/train.py:48) opt_hp_Adam_epsilon: 1e-09
+:::MLPv0.5.0 transformer 1541632773.634584427 (/workspace/translation/train.py:53) run_set_random_seed: 32385
+| [en] dictionary: 33712 types
+| [de] dictionary: 33712 types
+:::MLPv0.5.0 transformer 1541632773.716507196 (/workspace/translation/train.py:61) model_hp_sequence_beam_search: {"alpha": 1, "beam_size": 4, "extra_decode_length": 200, "vocab_size": 33712}
+:::MLPv0.5.0 transformer 1541632775.187730789 (/workspace/translation/fairseq/models/transformer.py:96) input_max_length: 1024
+:::MLPv0.5.0 transformer 1541632775.196953535 (/workspace/translation/fairseq/models/transformer.py:119) model_hp_embedding_shared_weights: {"hidden_size": 1024, "vocab_size": 33712}
+| /data train 4575616 examples
+:::MLPv0.5.0 transformer 1541632775.254119396 (/workspace/translation/fairseq/models/transformer.py:96) input_max_length: 1024
+:::MLPv0.5.0 transformer 1541632775.262239218 (/workspace/translation/fairseq/models/transformer.py:119) model_hp_embedding_shared_weights: {"hidden_size": 1024, "vocab_size": 33712}
+| Sentences are being padded to multiples of: 1
+| /data valid 3000 examples
+| Sentences are being padded to multiples of: 1
+:::MLPv0.5.0 transformer 1541632775.348648310 (/workspace/translation/fairseq/models/transformer.py:96) input_max_length: 1024
+:::MLPv0.5.0 transformer 1541632775.366625786 (/workspace/translation/fairseq/models/transformer.py:96) input_max_length: 1024
+:::MLPv0.5.0 transformer 1541632775.374875069 (/workspace/translation/fairseq/models/transformer.py:119) model_hp_embedding_shared_weights: {"hidden_size": 1024, "vocab_size": 33712}
+:::MLPv0.5.0 transformer 1541632775.378583193 (/workspace/translation/fairseq/models/transformer.py:96) input_max_length: 1024
+:::MLPv0.5.0 transformer 1541632775.355863094 (/workspace/translation/fairseq/models/transformer.py:119) model_hp_embedding_shared_weights: {"hidden_size": 1024, "vocab_size": 33712}
+:::MLPv0.5.0 transformer 1541632775.384380341 (/workspace/translation/fairseq/models/transformer.py:119) model_hp_embedding_shared_weights: {"hidden_size": 1024, "vocab_size": 33712}
+:::MLPv0.5.0 transformer 1541632775.405333281 (/workspace/translation/fairseq/models/transformer.py:96) input_max_length: 1024
+:::MLPv0.5.0 transformer 1541632775.412098408 (/workspace/translation/fairseq/models/transformer.py:119) model_hp_embedding_shared_weights: {"hidden_size": 1024, "vocab_size": 33712}
+:::MLPv0.5.0 transformer 1541632775.422573566 (/workspace/translation/fairseq/models/transformer.py:96) input_max_length: 1024
+:::MLPv0.5.0 transformer 1541632775.426112413 (/workspace/translation/fairseq/models/transformer.py:96) input_max_length: 1024
+:::MLPv0.5.0 transformer 1541632775.427090883 (/workspace/translation/fairseq/models/transformer.py:119) model_hp_embedding_shared_weights: {"hidden_size": 1024, "vocab_size": 33712}
+:::MLPv0.5.0 transformer 1541632775.430518627 (/workspace/translation/fairseq/models/transformer.py:119) model_hp_embedding_shared_weights: {"hidden_size": 1024, "vocab_size": 33712}
+:::MLPv0.5.0 transformer 1541632777.978652477 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632777.979787827 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632777.985692978 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632777.986866236 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632777.991997957 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632777.995647907 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632777.996643066 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.005557299 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.008391380 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.031646252 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.047621965 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.070845604 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.077976942 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.145513058 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.151987553 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.158916235 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.160964489 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.180950642 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.182449579 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.183277130 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.196983576 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.201449394 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.201490402 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.204567194 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.213203907 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.215508461 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.219890356 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.249849319 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.261032820 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.280781746 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.302675724 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.307926416 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.311209440 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.314304829 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.319865227 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.320452690 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.325369596 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.331440687 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.340451479 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.342206001 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.367811918 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.374918222 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.376333714 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.377623320 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.381139755 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.382174015 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.383137703 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.384102345 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.385180473 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.385203362 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.386229038 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.390529871 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.413150787 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.418454647 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.426625013 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.427293539 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.427911758 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.428513765 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.429214954 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.429435492 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.429859877 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.437912941 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.441197157 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.457336426 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.461192369 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.463062763 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.479885817 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.492882252 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.493524790 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.494147778 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.494767189 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.495476484 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.496150017 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.496865273 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.498659849 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.503800631 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.507507801 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.511051416 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.523912191 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.524959803 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.525944471 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.526680946 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.527477264 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.528251410 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.537750244 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.537914276 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.539431334 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.545063734 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.545971394 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.546808481 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.547334671 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.547665834 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.548471451 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.548674822 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.549318314 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.559041977 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.569318295 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.570104837 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.570881605 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.571631670 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.572528362 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.573320389 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.576702833 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.582545996 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.583754778 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.583935976 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.592438459 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.593181849 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.604589939 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.614614487 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.614957333 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.615412951 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.616118193 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.616812468 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.617720366 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.618518829 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.619942665 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.621514082 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.625747204 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.626539469 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.627326727 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.628052950 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.629015207 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.629099607 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.629791260 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.630393267 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.633971691 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.634763241 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.635561705 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.636355877 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.637246132 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.638129234 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.640700579 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.647948980 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.650434494 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.653931379 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.654684782 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.655473709 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.656184673 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.657084942 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.657877684 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.662915230 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.668233871 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.669047356 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.678767920 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.679303646 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.680204868 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.681078196 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.681900501 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.682768583 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.682889462 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.683564663 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.688662767 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.693591118 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.697021246 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.704716206 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.707284451 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.719639778 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.720247984 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.721015453 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.721351385 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.721731901 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.722348213 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.723244905 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.724048138 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.726408243 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.727250099 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.728116274 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.728760242 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.728986979 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.729828835 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.730686426 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.732979536 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.735341787 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.740434647 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.743927002 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.764488935 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.765114069 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.765254974 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.765944481 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.766608477 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.767421246 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.768153429 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.772506475 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.774238348 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.778176785 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.779073238 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.785679340 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.796513557 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.809803247 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.810279369 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.811115742 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.811241150 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.811945438 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.812680244 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.813558102 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.814352989 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.815130472 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.815412998 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.816069603 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.816787243 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.817118168 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.817626476 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.818532705 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.819409609 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.825115681 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.829162836 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.830202341 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.830897808 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.831656218 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.831850767 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.832454681 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.833333731 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.834134340 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.844294071 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.848642111 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.849446774 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.850196362 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.850937128 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.851763248 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.852550507 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.857527256 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.862136841 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.862806559 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.863023281 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.863806963 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.864012003 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.864612818 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.865587950 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.866330862 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.866495848 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.876078606 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.879792452 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.882050753 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.883976698 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.899286509 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.902261734 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.902488470 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.909321785 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.910197020 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.911033869 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.911061049 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.911834002 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.912750244 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.913607121 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.915858984 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.916640520 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.917416334 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.918166161 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.919033289 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.919823885 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.923792839 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.926035404 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.928317785 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.931481361 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.939491510 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.948075056 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.957580328 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.960039616 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.960847616 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.961642504 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.962393999 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632778.963262558 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632778.964046240 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.968897581 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632778.968960285 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.974188328 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.974483967 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.992826462 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632778.998177052 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.999045610 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632778.999904394 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.000581741 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.000768185 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.001429796 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.002328396 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.006118059 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.006893873 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.007449150 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.007646561 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.008394718 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.009236336 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.010036469 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.010782957 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.012213469 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.012210369 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.014301777 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.020561934 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.033841133 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.034632444 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.035439253 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.036178350 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.037083387 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.037894249 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.043395996 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.043684006 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.044291019 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.044488907 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.045187235 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.045302391 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.046065807 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.046146870 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.046930075 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.047033787 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.047667742 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.047704458 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.047793150 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.049412966 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.052722692 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.057344675 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.058242321 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.059700966 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.061184168 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.079752207 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.085392237 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.086333752 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.090577126 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.091399193 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.092123747 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.092232704 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.093037367 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.093903303 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.094730854 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.094995260 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.098422527 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.104453325 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.112079144 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.112874508 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.113662720 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.114380360 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.115275383 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.116050005 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.123306513 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.127379417 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.128886223 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.130399704 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.134751797 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.138566732 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.151788473 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.156992674 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.157765150 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.158604383 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.159318209 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.164655924 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.169639587 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.174208164 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.174982309 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.175810337 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.181280851 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.182144880 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.182994843 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.183818102 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.186101675 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.194622517 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.201990604 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.202834129 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.202806234 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.203435659 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.203756809 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.204020023 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.204185009 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.205068827 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.205850124 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.205842972 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.206171036 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.213456154 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.216068506 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.223611832 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.237882853 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.238130093 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.238648891 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.238911152 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.239379883 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.239610195 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.240084648 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.240314007 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.240946531 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.241692305 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.242119789 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.242337465 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.242936850 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.243829250 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.244670391 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.245598555 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.246457100 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.249478579 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.252393007 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.254222870 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.256914616 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.257749081 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.257909060 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.264192343 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.268331051 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.273935795 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.274801254 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.275676966 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.275968075 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.276497841 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.286579609 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.290340185 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.293305397 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.294059277 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.295278311 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.296231747 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.305608749 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.305912256 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.308368921 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.309111357 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.309897661 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.310629368 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.330600977 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.333893299 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.334898233 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.339827538 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.340667248 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.341312170 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.345269442 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.351962805 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.353712320 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.364588737 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.367160082 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.367938042 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.368667364 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.369433403 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.370071650 (/workspace/translation/fairseq/models/transformer.py:214) model_hp_hidden_layers: 6
+:::MLPv0.5.0 transformer 1541632779.373575449 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.374287367 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.378746986 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.385632277 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.391664028 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.396592140 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.397624254 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.398591995 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.399547338 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.400396109 (/workspace/translation/fairseq/models/transformer.py:214) model_hp_hidden_layers: 6
+:::MLPv0.5.0 transformer 1541632779.400989771 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.401177883 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.402084589 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.402880907 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.403660059 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.420658827 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.420870066 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.421738863 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.433337927 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.434773207 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.436909914 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.456903458 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.458970308 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.460815907 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.461706400 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.463044643 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.464379787 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.465686321 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.466822624 (/workspace/translation/fairseq/models/transformer.py:214) model_hp_hidden_layers: 6
+:::MLPv0.5.0 transformer 1541632779.474586010 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.475989103 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.477245331 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.478493690 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.479630709 (/workspace/translation/fairseq/models/transformer.py:214) model_hp_hidden_layers: 6
+:::MLPv0.5.0 transformer 1541632779.480009556 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.493010521 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.511751413 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.512654781 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.513491869 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.514765263 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.516667843 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.517843723 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.519275665 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.525328875 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.525597334 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.528764009 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.531019449 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.532544613 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.533225536 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.552026987 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.553584337 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.554878235 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.555044651 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.556513309 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.557568073 (/workspace/translation/fairseq/models/transformer.py:214) model_hp_hidden_layers: 6
+:::MLPv0.5.0 transformer 1541632779.572268724 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.575156689 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.576421261 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.577618837 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.578808546 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.579866648 (/workspace/translation/fairseq/models/transformer.py:214) model_hp_hidden_layers: 6
+:::MLPv0.5.0 transformer 1541632779.586963177 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.617251396 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.622119665 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.627465963 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.640220165 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.645744324 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.646518946 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.649696589 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.658280849 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.670375109 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.670428514 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.693988085 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.698593855 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.700121880 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.701392889 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.704113245 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.717355728 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.724461555 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.741286993 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.741392374 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.742796898 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.743881702 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.745451212 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.746326685 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.746999741 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.758387566 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.761275291 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.762174606 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.788962603 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.790431976 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.791615963 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.795300245 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.800211430 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.801857233 (/workspace/translation/fairseq/models/transformer.py:419) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.810876846 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.811089516 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.820492744 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.821249485 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.821974754 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.822681904 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.823469400 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.824225426 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.835600376 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.838559389 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.845757484 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.846535206 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.847312212 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.848080873 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.848703384 (/workspace/translation/fairseq/models/transformer.py:214) model_hp_hidden_layers: 6
+:::MLPv0.5.0 transformer 1541632779.852065086 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.852068424 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.853153467 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.871570587 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.876337767 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.877163410 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.877827406 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.889143705 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.889805079 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.903563976 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.910717964 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.911220789 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.912209749 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.912894487 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.915064812 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.924350262 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.934346437 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.951126575 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.951186657 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.951859474 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.952189207 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.952490807 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.953091860 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.953174591 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.953818321 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.954149485 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.954511881 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.955263376 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.956323862 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.959196091 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.965895414 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.971758842 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.972184658 (/workspace/translation/fairseq/models/transformer.py:428) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.973034859 (/workspace/translation/fairseq/models/transformer.py:430) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632779.973796368 (/workspace/translation/fairseq/models/transformer.py:431) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.974548578 (/workspace/translation/fairseq/models/transformer.py:432) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632779.974606276 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.975223541 (/workspace/translation/fairseq/models/transformer.py:214) model_hp_hidden_layers: 6
+:::MLPv0.5.0 transformer 1541632779.980008602 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632779.981177568 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632779.988083363 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632779.999659777 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.019423246 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.020839691 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.022120953 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.023393869 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.023789644 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.024824619 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.024868011 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.025931358 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.026229143 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.026636839 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.027262211 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.027502537 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.028308630 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.028747320 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.029696703 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.030154943 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.032453060 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.041544437 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.043215036 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.044585705 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.044834137 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.048248529 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.049108028 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.049951553 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.058335781 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.059265137 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.059957027 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.063165426 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.071290255 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.084304333 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.084944963 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.084966898 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.085555315 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.086040020 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.086160421 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.086872578 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.087022781 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.087567091 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.088003397 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.089121342 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.090169907 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.098935366 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.108543158 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.111795425 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.113200426 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.114265680 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.116576910 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.117929935 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.118998289 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.132453680 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.138046026 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.138428211 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.139467478 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.140310764 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.140974760 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.148146152 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.152268887 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.158401489 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.158725977 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.159536839 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.160324097 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.171758175 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.173627853 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.174409866 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.175147295 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.175884724 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.176723719 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.177560568 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.187326431 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.188277245 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.210764885 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.221571445 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.221681833 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.222683191 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.223570347 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.227134705 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.229135990 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.233337164 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.233865738 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.245465994 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.252935171 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.253700495 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.254508018 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.255259037 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.256121874 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.256917953 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.257920027 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.266258717 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.267084837 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.267569065 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.267795801 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.268479347 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.269325495 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.270134211 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.280225992 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.282118559 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.290569782 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.291373253 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.291921377 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.292141676 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.292618036 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.292871475 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.293567896 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.294340611 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.302837133 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.304443121 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.305556297 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.306571245 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.307386398 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.315260172 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.316096306 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.316863060 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.317649841 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.318161726 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.318491697 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.318888903 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.319129229 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.319231272 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.320171595 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.321012020 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.321289539 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.322046757 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.322132111 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.323001385 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.323008776 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.323813438 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.323850155 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.324671984 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.324704885 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.325556040 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.325618982 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.326426268 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.329838753 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.331400633 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.336338997 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.336832523 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.342707396 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.343720913 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.344539404 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.351569891 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.352372169 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.353137970 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.353893995 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.354759455 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.355555773 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.355847359 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.365574837 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.369537115 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.369987488 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.370288372 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.370604515 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.371015072 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.371143341 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.371276617 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.371436357 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.371821404 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.372114897 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.381371021 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.381628275 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.382841349 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.394992352 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.401246548 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.402120352 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.402814388 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.402954102 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.403561831 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.403923988 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.404545546 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.404715538 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.405490637 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.412313700 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.415174723 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.415181637 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.432670832 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.449093342 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.450178146 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.451010227 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.452393293 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.453961611 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.456858158 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.461582899 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.464799643 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.484903097 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.488583088 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.496239662 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.497012138 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.497766733 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.498512030 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.499373674 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.500173092 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.502645493 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.510404110 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.516783953 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.518120050 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.518294573 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.518930435 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.519711733 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.520490646 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.521375418 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.522180557 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.527834177 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.531158686 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.532449961 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.535506248 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.536312342 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.537087202 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.537832499 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.538712978 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.539514065 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.546147823 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.546986103 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.547853231 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.547935247 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.548664331 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.548814774 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.548897982 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.549550772 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.549577236 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.549676895 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.550005198 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.550366879 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.550399303 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.550766230 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.551214218 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.552020311 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.560776711 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.560923576 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.561307907 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.561769247 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.562040329 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.562716722 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.562995672 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.563471794 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.564404726 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.565226078 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.571342707 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.572392225 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.573208094 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.575954914 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.583501816 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.588009119 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.589012384 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.589823246 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.594841003 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.595568180 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.595925331 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.596413851 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.596821547 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.597228527 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.597945929 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.598065138 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.598799706 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.599010706 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.599587440 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.599938869 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.600849867 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.601509094 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.607869864 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.610026598 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.611177206 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.614587545 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.615626097 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.616473675 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.626636744 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.631075621 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.632061720 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.632930994 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.633763790 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.634668589 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.635511875 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.638862610 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.645372152 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.646896124 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.647939920 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.648738146 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.660238743 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.664317608 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.675708771 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.678883791 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.679749966 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.680924654 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.681813240 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.684577465 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.691829920 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.700365543 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.707528591 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.733033180 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.737820864 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.738981485 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.739744663 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.740472555 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.741198540 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.742094994 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.742850065 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.743692875 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.744885683 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.748276711 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.753322601 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.761152983 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.770338058 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.771070719 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.772025585 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.772766352 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.773033381 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.773535490 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.773931503 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.774416924 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.774794579 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.775221109 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.775624037 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.776609182 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.777450323 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.778101683 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.778928757 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.779277563 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.779730082 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.780116796 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.780474424 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.780895233 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.781379223 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.781642914 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.782185555 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.782451630 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.783207893 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.786971807 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.789114952 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.792423487 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.792541742 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.793476343 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.794264078 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.794750452 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.804344893 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.805803537 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.806624413 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.807373285 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.807602406 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.808147192 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.809084415 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.809906006 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.820029497 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.823327780 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.824560404 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.825023174 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.825466394 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.826156616 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.827001810 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.829378605 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.830430269 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.831114292 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.831305265 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.831838369 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.832180023 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.833150148 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.836243391 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.837966442 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.841248989 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.842093706 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.842348099 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.842845201 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.843585014 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.844255924 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.844584465 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.845371246 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.855178595 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.873717308 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.875281811 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.876491547 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.880578518 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.885532379 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.886510372 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.887373209 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.888315439 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.889353037 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.890317917 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.891604424 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.892643690 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.893099785 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.893409014 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.903257132 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.906276941 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.906847477 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.912791491 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.917439461 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.918665886 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.949871063 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.962239027 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.963097095 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.963672638 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.970554829 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.973383904 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.976378202 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.976571798 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.981996775 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.982783794 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632780.983586788 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.984392166 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632780.985234261 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632780.986046314 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632780.987707615 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.990179777 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.991089821 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632780.996456385 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.000974417 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.001773357 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.002588511 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.003378868 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632781.004208326 (/workspace/translation/fairseq/models/transformer.py:302) model_hp_hidden_layers: 6
+:::MLPv0.5.0 transformer 1541632781.008148193 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.008995056 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.009775639 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.010532856 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632781.011423826 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632781.012253284 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.018572092 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.019389391 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.020223141 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.021003723 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632781.021914482 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632781.022749186 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.023444891 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.023448467 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.024108171 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.024882078 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.025724173 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632781.026548386 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632781.027305365 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.034144878 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.034675598 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.035854578 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632781.036659718 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.038352966 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.046973467 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.047984838 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.049577475 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.058290958 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.059437037 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632781.059836388 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.060192585 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.070454121 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.070975304 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.071503162 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632781.072374105 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.074697495 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.075763464 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632781.076597452 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.081418514 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.082252741 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.083038568 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.083617687 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.083852530 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632781.084681749 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632781.085483789 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.087991476 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.090190411 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.091046572 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.091954708 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.092727900 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632781.093620539 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632781.094451904 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.095964670 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.104484558 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.116839886 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.121966600 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.130762339 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.132059813 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632781.132923365 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.139884949 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.141095400 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632781.141951323 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.142767668 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.146830082 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.148689747 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.149561644 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.150335312 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.151118279 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632781.152058125 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632781.152894497 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.153627634 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.156227827 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.163126945 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.164087057 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.192776918 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.198864698 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.200143099 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632781.200993061 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.211013556 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.214214087 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.216168880 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.222752094 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.224763393 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.225553513 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.226333141 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.227115154 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632781.227068186 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.227805138 (/workspace/translation/fairseq/models/transformer.py:302) model_hp_hidden_layers: 6
+:::MLPv0.5.0 transformer 1541632781.234827757 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.247669220 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.248558760 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.249379158 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.250140429 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632781.250809193 (/workspace/translation/fairseq/models/transformer.py:302) model_hp_hidden_layers: 6
+| model transformer_wmt_en_de_big_t2t, criterion LabelSmoothedCrossEntropyCriterion
+| num. model params: 210808832
+:::MLPv0.5.0 transformer 1541632781.253546476 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.254349232 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.255167961 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.255954266 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632781.256658077 (/workspace/translation/fairseq/models/transformer.py:302) model_hp_hidden_layers: 6
+:::MLPv0.5.0 transformer 1541632781.267128944 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.268048286 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.268922329 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.269713163 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632781.270611763 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632781.271446705 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.281938791 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.285702467 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.285845995 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.295730352 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.316789865 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.317625046 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.318241119 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.318272591 (/workspace/translation/fairseq/models/transformer.py:484) model_hp_relu_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.319000244 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632781.319616795 (/workspace/translation/fairseq/modules/multihead_attention.py:158) model_hp_attention_dense: {"num_heads": 16, "hidden_size": 1024, "use_bias": false}
+:::MLPv0.5.0 transformer 1541632781.319682360 (/workspace/translation/fairseq/models/transformer.py:302) model_hp_hidden_layers: 6
+:::MLPv0.5.0 transformer 1541632781.320402145 (/workspace/translation/fairseq/modules/multihead_attention.py:162) model_hp_attention_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.326458216 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.327325106 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.328266144 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.329073191 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632781.329774857 (/workspace/translation/fairseq/models/transformer.py:302) model_hp_hidden_layers: 6
+:::MLPv0.5.0 transformer 1541632781.331157684 (/workspace/translation/fairseq/modules/multihead_attention.py:188) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.355347872 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.386958361 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.388007164 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.388880014 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.389609098 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632781.390315771 (/workspace/translation/fairseq/models/transformer.py:302) model_hp_hidden_layers: 6
+:::MLPv0.5.0 transformer 1541632781.411628246 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.486375093 (/workspace/translation/fairseq/models/transformer.py:593) model_hp_initializer_gain: 1
+:::MLPv0.5.0 transformer 1541632781.519279003 (/workspace/translation/fairseq/models/transformer.py:508) model_hp_ffn_filter_dense: {"filter_size": 4096, "activation": "relu", "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.520246267 (/workspace/translation/fairseq/models/transformer.py:510) model_hp_ffn_output_dense: {"hidden_size": 1024, "use_bias": true}
+:::MLPv0.5.0 transformer 1541632781.520916224 (/workspace/translation/fairseq/models/transformer.py:511) model_hp_layer_postprocess_dropout: 0.1
+:::MLPv0.5.0 transformer 1541632781.521680355 (/workspace/translation/fairseq/models/transformer.py:512) model_hp_norm: 1024
+:::MLPv0.5.0 transformer 1541632781.522384644 (/workspace/translation/fairseq/models/transformer.py:302) model_hp_hidden_layers: 6
+| training on 8 GPUs
+| max tokens per GPU = 5120 and max sentences per GPU = None
+:::MLPv0.5.0 transformer 1541632781.810299397 (/workspace/translation/train.py:88) input_batch_size: 5120
+:::MLPv0.5.0 transformer 1541632781.810704470 (/workspace/translation/train.py:89) input_order
+:::MLPv0.5.0 transformer 1541632783.282682657 (/workspace/translation/fairseq/optim/lr_scheduler/inverse_square_root_schedule.py:42) opt_learning_rate_warmup_steps: 3000
+:::MLPv0.5.0 transformer 1541632783.283413172 (/workspace/translation/train.py:114) train_loop
+:::MLPv0.5.0 transformer 1541632783.283780813 (/workspace/translation/train.py:116) train_epoch: 0
+generated batches in  1.6515355110168457 s
+got epoch iterator 1.6521837711334229
+| WARNING: overflow detected, setting loss scale to: 64.0
+| WARNING: overflow detected, setting loss scale to: 32.0
+| epoch 001:   1000 / 3935 loss=10.138, nll_loss=9.352, ppl=653.27, wps=239920, ups=6.5, wpb=36317, bsz=1156, num_updates=999, lr=0.00021312, gnorm=121831.191, clip=100%, oom=0, loss_scale=32.000, wall=155
+| WARNING: overflow detected, setting loss scale to: 16.0
+| epoch 001:   2000 / 3935 loss=8.403, nll_loss=7.334, ppl=161.36, wps=239511, ups=6.5, wpb=36182, bsz=1159, num_updates=1998, lr=0.00042624, gnorm=81397.161, clip=100%, oom=0, loss_scale=16.000, wall=305
+| epoch 001:   3000 / 3935 loss=7.474, nll_loss=6.261, ppl=76.70, wps=239480, ups=6.6, wpb=36173, bsz=1160, num_updates=2998, lr=0.000639573, gnorm=63924.605, clip=100%, oom=0, loss_scale=16.000, wall=456
+| WARNING: overflow detected, setting loss scale to: 16.0
+| epoch 001 | loss 6.942 | nll_loss 5.652 | ppl 50.28 | wps 239183 | ups 6.6 | wpb 36150 | bsz 1162 | num_updates 3931 | lr 0.000559099 | gnorm 57227.392 | clip 100% | oom 0 | loss_scale 16.000 | wall 598
+epoch time  594.6348905563354
+generated batches in  0.0007638931274414062 s
+| epoch 001 | valid on 'valid' subset | valid_loss 4.71346 | valid_nll_loss 3.06334 | valid_ppl 8.36 | num_updates 3931
+:::MLPv0.5.0 transformer 1541633379.904884815 (/workspace/translation/train.py:149) eval_start: -1
+| /data test 3003 examples
+| Sentences are being padded to multiples of: 1
+generated batches in  0.0005655288696289062 s
+| Translated 384 sentences (8241 tokens) in 2.3s (170.50 sentences/s, 3659.02 tokens/s)
+| Generate test with beam=4: BLEU4 = 20.90, 53.7/26.6/15.0/8.9 (BP=1.000, ratio=1.028, syslen=66297, reflen=64503)
+| Eval completed in: 7.42s
+:::MLPv0.5.0 transformer 1541633387.333184004 (/workspace/translation/train.py:152) eval_accuracy: {"epoch": -1, "value": 20.898006811190445}
+:::MLPv0.5.0 transformer 1541633387.333881140 (/workspace/translation/train.py:153) eval_target: 25.0
+:::MLPv0.5.0 transformer 1541633387.334244490 (/workspace/translation/train.py:154) eval_stop: -1
+validation and scoring  7.763250112533569
+:::MLPv0.5.0 transformer 1541633387.334694624 (/workspace/translation/train.py:116) train_epoch: 1
+generated batches in  1.6701531410217285 s
+got epoch iterator 1.7727432250976562
+| WARNING: overflow detected, setting loss scale to: 8.0
+| epoch 002:   1000 / 3935 loss=4.972, nll_loss=3.409, ppl=10.63, wps=240497, ups=6.2, wpb=36221, bsz=1166, num_updates=4931, lr=0.000499198, gnorm=47539.399, clip=100%, oom=0, loss_scale=8.000, wall=758
+| epoch 002:   2000 / 3935 loss=4.907, nll_loss=3.339, ppl=10.12, wps=239848, ups=6.4, wpb=36220, bsz=1165, num_updates=5931, lr=0.000455173, gnorm=40934.295, clip=100%, oom=0, loss_scale=8.000, wall=910
+| epoch 002:   3000 / 3935 loss=4.861, nll_loss=3.290, ppl=9.78, wps=239843, ups=6.5, wpb=36181, bsz=1163, num_updates=6931, lr=0.000421059, gnorm=37260.449, clip=100%, oom=0, loss_scale=16.000, wall=1060
+| epoch 002 | loss 4.822 | nll_loss 3.249 | ppl 9.51 | wps 239749 | ups 6.5 | wpb 36151 | bsz 1162 | num_updates 7865 | lr 0.000395268 | gnorm 34590.222 | clip 100% | oom 0 | loss_scale 16.000 | wall 1201
+epoch time  593.4404866695404
+generated batches in  0.00080108642578125 s
+| epoch 002 | valid on 'valid' subset | valid_loss 4.26758 | valid_nll_loss 2.57244 | valid_ppl 5.95 | num_updates 7865
+:::MLPv0.5.0 transformer 1541633982.886435986 (/workspace/translation/train.py:149) eval_start: 0
+generated batches in  0.0005991458892822266 s
+| Translated 384 sentences (8290 tokens) in 4.5s (85.52 sentences/s, 1846.27 tokens/s)
+| Generate test with beam=4: BLEU4 = 23.97, 56.3/29.6/17.7/11.2 (BP=1.000, ratio=1.040, syslen=67083, reflen=64503)
+| Eval completed in: 7.11s
+:::MLPv0.5.0 transformer 1541633989.999319792 (/workspace/translation/train.py:152) eval_accuracy: {"epoch": 0, "value": 23.969139956225266}
+:::MLPv0.5.0 transformer 1541633989.999845743 (/workspace/translation/train.py:153) eval_target: 25.0
+:::MLPv0.5.0 transformer 1541633990.000216722 (/workspace/translation/train.py:154) eval_stop: 0
+validation and scoring  7.45224666595459
+:::MLPv0.5.0 transformer 1541633990.000630379 (/workspace/translation/train.py:116) train_epoch: 2
+generated batches in  1.624136209487915 s
+got epoch iterator 1.7259836196899414
+| epoch 003:   1000 / 3935 loss=4.566, nll_loss=2.966, ppl=7.81, wps=239632, ups=6.2, wpb=36254, bsz=1171, num_updates=8866, lr=0.000372286, gnorm=33777.283, clip=100%, oom=0, loss_scale=32.000, wall=1362
+| epoch 003:   2000 / 3935 loss=4.557, nll_loss=2.957, ppl=7.76, wps=239707, ups=6.4, wpb=36183, bsz=1167, num_updates=9866, lr=0.000352915, gnorm=33134.585, clip=100%, oom=0, loss_scale=32.000, wall=1512
+| WARNING: overflow detected, setting loss scale to: 32.0
+| WARNING: overflow detected, setting loss scale to: 16.0
+| epoch 003:   3000 / 3935 loss=4.543, nll_loss=2.942, ppl=7.68, wps=240087, ups=6.5, wpb=36184, bsz=1163, num_updates=10864, lr=0.000336315, gnorm=34535.868, clip=100%, oom=0, loss_scale=16.000, wall=1662
+| epoch 003 | loss 4.537 | nll_loss 2.936 | ppl 7.65 | wps 240089 | ups 6.5 | wpb 36153 | bsz 1162 | num_updates 11798 | lr 0.000322728 | gnorm 32832.369 | clip 100% | oom 0 | loss_scale 16.000 | wall 1802
+epoch time  592.4551928043365
+generated batches in  0.0007882118225097656 s
+| epoch 003 | valid on 'valid' subset | valid_loss 4.132 | valid_nll_loss 2.433 | valid_ppl 5.40 | num_updates 11798
+:::MLPv0.5.0 transformer 1541634584.520761490 (/workspace/translation/train.py:149) eval_start: 1
+generated batches in  0.0006246566772460938 s
+| Translated 384 sentences (8259 tokens) in 2.3s (163.43 sentences/s, 3515.03 tokens/s)
+| Generate test with beam=4: BLEU4 = 25.58, 57.8/31.3/19.2/12.3 (BP=1.000, ratio=1.022, syslen=65931, reflen=64503)
+| Eval completed in: 6.73s
+:::MLPv0.5.0 transformer 1541634591.257362366 (/workspace/translation/train.py:152) eval_accuracy: {"epoch": 1, "value": 25.577211359537056}
+:::MLPv0.5.0 transformer 1541634591.257892132 (/workspace/translation/train.py:153) eval_target: 25.0
+:::MLPv0.5.0 transformer 1541634591.258255959 (/workspace/translation/train.py:154) eval_stop: 1
+validation and scoring  7.076452255249023
+:::MLPv0.5.0 transformer 1541634591.258777618 (/workspace/translation/train.py:167) run_stop
+:::MLPv0.5.0 transformer 1541634591.259124994 (/workspace/translation/train.py:168) run_final
+| done training in 1808.0 seconds
++++ date +%s
+++ END=1541634593
++++ date '+%Y-%m-%d %r'
+++ END_FMT='2018-11-07 11:49:53 PM'
+++ echo 'ENDING TIMING RUN AT 2018-11-07 11:49:53 PM'
+++ RESULT=1830
+++ RESULT_NAME=transformer
+++ echo 'RESULT,transformer,32385,1830,,2018-11-07 11:19:23 PM'
+ENDING TIMING RUN AT 2018-11-07 11:49:53 PM
+RESULT,transformer,32385,1830,,2018-11-07 11:19:23 PM
++ set +x

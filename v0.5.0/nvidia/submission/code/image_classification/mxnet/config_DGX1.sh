@@ -1,0 +1,21 @@
+#!/bin/bash
+
+## DL params
+BATCHSIZE="1664"
+KVSTORE="device"
+LR="0.6"
+WARMUP_EPOCHS="5"
+EVAL_OFFSET="2"
+DALI_PREFETCH_QUEUE="2"
+DALI_NVJPEG_MEMPADDING="64"
+
+## System run parms
+DGXNNODES=1
+DGXSYSTEM=DGX1
+WALLTIME=12:00:00
+
+## System config params
+DGXNGPU=8
+DGXSOCKETCORES=20
+DGXHT=2         # HT is on is 2, HT off is 1
+DGXIBDEVICES=''

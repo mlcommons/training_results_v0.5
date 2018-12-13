@@ -11,19 +11,24 @@ This benchmark uses Mask R-CNN for object detection.
 The Mask R-CNN script operates on COCO, a large-scale object detection, segmentation, and captioning dataset.
 To download and verify the dataset use following scripts:
    
-    cd ~/reference/object_detection/
-    ./download_dataset.sh
-    ./verify_dataset.sh
+    ../download_dataset.sh
+    ../verify_dataset.sh
 
 This should return `PASSED`. 
 To extract the dataset use:
-   
-    ./caffe2/extract_dataset.sh
+
+    wget https://raw.githubusercontent.com/mlperf/training/master/object_detection/caffe2/extract_dataset.sh
+    chmod +x extract_dataset.sh
+    ./extract_dataset.sh
 
 Mask R-CNN uses pre-trained ResNet50 as a backbone. 
 To download and verify the RN50 weights use:
- 
-    ./download_weights.sh
+
+    ../download_weights.sh
+
+Then convert the pre-trained backbone from Caffe2 to PyTorch format:
+
+    ./convert_c2_model.py
 
 ## Steps to launch training
 

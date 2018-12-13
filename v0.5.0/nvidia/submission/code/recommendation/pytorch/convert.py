@@ -42,7 +42,7 @@ ITEM_COLUMN = 'item_id'
 def parse_args():
     parser = ArgumentParser()
     parser.add_argument('--path', type=str, default='/data/ml-20m/ratings.csv',
-                        help='Path to reviews CSV file from MovieLens')
+                        help='Path to ratings.csv file from MovieLens')
     parser.add_argument('--output', type=str, default='/data',
                         help='Output directory for train and test files')
     return parser.parse_args()

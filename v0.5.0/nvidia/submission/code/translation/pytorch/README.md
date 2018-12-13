@@ -11,9 +11,10 @@ This problem uses Attention mechanisms to do language translation.
 
 ### Steps to download and verify data
 
-Download the data using the following command. Note: this will require a recent version of tensorflow installed.
-   
-    bash download_data.sh
+Downloading and preprocessing the data is handled inside submission scripts. To do this manually run 
+    DATASET_DIR='/your/path/to/dataset/' bash run_preprocessing.sh
+To download the data alone run
+    bash prepare-wmt14en2de.sh --scaling18 
     
 ### Steps to run and time
 

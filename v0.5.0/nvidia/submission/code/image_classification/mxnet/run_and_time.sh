@@ -75,7 +75,7 @@ PARAMS=(
 
 if [[ "${KVSTORE}" == "horovod" ]]; then
    DGXSYSTEM=${DGXSYSTEM:-DGX1}
-   BIND="./ompi_bind_${DGXSYSTEM/_multi_*/}.sh"
+   BIND="./ompi_bind_${DGXSYSTEM/_multi*/}.sh"
 fi
 ${BIND} python train_imagenet.py "${PARAMS[@]}"; ret_code=$?
 

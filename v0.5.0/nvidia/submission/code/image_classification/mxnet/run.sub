@@ -51,12 +51,7 @@ LOGFILE_BASE="${LOGDIR}/${DATESTAMP}"
 mkdir -p $(dirname "${LOGFILE_BASE}")
 
 ## Docker params
-SRCDIR=${CODEDIR}/${BENCHMARK}/mxnet
 export VOLS="-v $DATADIR:/data -v $LOGDIR:/results"
-for i in run_and_time.sh config_DGX2_multi.sh ompi_bind_DGX2.sh; do
-  VOLS+=" -v $SRCDIR/$i:/workspace/$BENCHMARK/$i"
-done
-
 export CONTNAME="mpi_${SLURM_JOB_ID}"
 export DOCKEREXEC="nvidia-docker run --rm --net=host --uts=host --ipc=host --ulimit stack=67108864 --ulimit memlock=-1 --security-opt seccomp=unconfined  $IBDEVICES"
 

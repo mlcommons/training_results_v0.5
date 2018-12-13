@@ -10,19 +10,8 @@ This problem uses the ResNet-50 CNN to do image classification.
 ## Steps to download and verify data
 Download the data using the following command:
 
-```
-cd ..
-bash download_dataset.sh
-cd -
-```
+Please download the dataset manually following the instructions from the [ImageNet website](http://image-net.org/download). We use non-resized Imagenet dataset, packed into MXNet recordio database. It is not resized and not normalized. No preprocessing was performed on the raw ImageNet jpegs.
 
-Verify data with:
-
-```
-cd ..
-bash verify_dataset.sh
-cd -
-```
 ## Steps to launch training
 
 ### NVIDIA DGX-1 (single node)

@@ -16,6 +16,10 @@ You can download and verify the dataset by running the `download_dataset.sh` and
 source recommendation/download_dataset.sh
 # Confirms the MD5 checksum of ml-20.zip
 source recommendation/verify_dataset.sh
+# Unzip
+unzip ml-20m.zip
+# Preprocessing
+python convert.py --path ./ml-20m/ratings.csv --output /data/ml-20m
 ```
 
 ### Steps to run and time

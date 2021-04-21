@@ -1,2 +1,2 @@
 # Submissions
-Public result submissions
+MLPerf™ Training v0.5 results

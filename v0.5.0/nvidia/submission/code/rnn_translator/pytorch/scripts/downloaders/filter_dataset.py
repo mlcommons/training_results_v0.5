@@ -49,7 +49,7 @@ def main():
     data1 = []
     data2 = []
 
-    with open(args.file1) as f1, open(args.file2) as f2:
+    with open(args.file1, encoding='utf-8') as f1, open(args.file2, encoding='utf-8') as f2:
         for idx, lines in enumerate(zip(f1, f2)):
             line1, line2 = lines
             if idx % 100000 == 1:
